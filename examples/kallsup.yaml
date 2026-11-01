@@ -1,0 +1,78 @@
+esphome:
+  name: kallsup-csengo
+  friendly_name: KALLSUP Csengo
+  min_version: 2026.10.1
+  project:
+    name: trtk.a2dp-esphome
+    version: "2.0.0"
+
+esp32:
+  board: nodemcu-32s
+  flash_size: 4MB
+  cpu_frequency: 160MHz
+  framework:
+    type: esp-idf
+    version: 5.5.6
+
+external_components:
+  - source: github://trtk/A2DP-ESPHome@main
+    components: [kallsup_chime]
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  power_save_mode: light
+
+logger:
+  level: INFO
+
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+preferences:
+  flash_write_interval: 10s
+
+kallsup_chime:
+  id: chime
+  speaker_name: KALLSUP
+  # Optional: uncomment to target a specific speaker instead of searching by name.
+  # address: !secret kallsup_mac
+  connected:
+    name: Bluetooth kapcsolat
+  audio_ready:
+    name: Csengetesre kesz
+
+button:
+  - platform: template
+    name: Csengetes
+    icon: mdi:bell-ring
+    on_press:
+      - lambda: id(chime).ring();
+
+number:
+  - platform: template
+    id: chime_volume
+    name: Hangero
+    icon: mdi:volume-high
+    unit_of_measurement: "%"
+    min_value: 0
+    max_value: 100
+    step: 1
+    mode: slider
+    optimistic: true
+    restore_value: true
+    initial_value: 47
+    on_value:
+      - lambda: id(chime).set_volume_percent(x);
+
+switch:
+  - platform: gpio
+    name: Kek LED
+    icon: mdi:led-on
+    pin: GPIO2
+    restore_mode: ALWAYS_OFF

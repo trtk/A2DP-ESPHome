@@ -1,0 +1,4 @@
+# Select the actual ESPHome button entity from Home Assistant after pairing.
+- action: button.press
+  target:
+    entity_id: button.kallsup_csengo_csengetes

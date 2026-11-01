@@ -1,0 +1,23 @@
+# Optional: run only AFTER verifying the new ESPHome entities and automation.
+# Replace kallsup_doorbell if the old firmware used a different DEVICE_ID.
+# Deletes only the four old discovery definitions; does not clear other MQTT data.
+- action: mqtt.publish
+  data:
+    topic: homeassistant/button/kallsup_doorbell/ring/config
+    payload: ""
+    retain: true
+- action: mqtt.publish
+  data:
+    topic: homeassistant/number/kallsup_doorbell/volume/config
+    payload: ""
+    retain: true
+- action: mqtt.publish
+  data:
+    topic: homeassistant/binary_sensor/kallsup_doorbell/bluetooth/config
+    payload: ""
+    retain: true
+- action: mqtt.publish
+  data:
+    topic: homeassistant/switch/kallsup_doorbell/blue_led/config
+    payload: ""
+    retain: true
