@@ -1,0 +1,15 @@
+# Local Wi-Fi, API and OTA secrets
+**/secrets.yaml
+.env
+.env.*
+
+# Build products and caches
+**/.esphome/
+**/build/
+.pio/
+.venv/
+__pycache__/
+*.pyc
+*.bin
+*.elf
+/dingdong-preview.wav
