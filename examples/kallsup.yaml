@@ -15,7 +15,7 @@ esp32:
     version: 5.5.6
 
 external_components:
-  - source: github://trtk/A2DP-ESPHome@main
+  - source: github://trtk/A2DP-ESPHome@f015844101867281244a53ffbd5a935054dc315b
     components: [kallsup_chime]
 
 wifi:
