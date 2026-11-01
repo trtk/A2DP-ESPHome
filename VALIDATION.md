@@ -6,7 +6,7 @@ Tesztelt környezet: normál **ESPHome 2026.10.1**, **ESP-IDF 5.5.6**, klassziku
 
 - `esphome config kallsup.yaml`: érvényes konfiguráció a helyi komponenssel.
 - Teljes firmware-fordítás és linkelés: sikeres. A végső forrásfájlokat összevetettük a ténylegesen lefordított komponensmásolatokkal.
-- Flash: 1 415 711 / 1 835 008 bájt (77,2%). A factory és OTA binárisok is elkészültek, az alkalmazás az OTA-partícióba belefér.
+- Flash: 1 415 679 / 1 835 008 bájt (77,1%). A factory és OTA binárisok is elkészültek, az alkalmazás az OTA-partícióba belefér.
 - A fordítás sdkconfigja: Classic-only vezérlő, Bluedroid, A2DP, belső SBC-kódoló, Wi-Fi/Bluetooth szoftveres együttműködés engedélyezve.
 - Natív C++ PCM-tesztek: csend üresjáratban, egyidejű csengetési kérések kezelése, sztereó kimenet, előjeles minták, hang vége és megszakítás.
 - Natív C++ hangerő-/címtesztek: teljes hangerő, némítás, pozitív és negatív minták skálázása, monoton exponenciális hangerőgörbe, 47%-os korábbi hangerővel összemérhető erősítés, érvényes/hibás MAC-címek.
@@ -31,3 +31,7 @@ g++ -std=c++11 -Wall -Wextra -Werror -Icomponents/kallsup_chime tests/chime_play
 Ebben a környezetben nincs fizikailag csatlakoztatott ESP32/KALLSUP. A párosítás, hallható lejátszás, hosszú üresjárat utáni viselkedés, hangerő megjegyzése, valós BT-visszacsatlakozás, GPIO2 LED, OTA és hőmérséklet nem lett hardveren tesztelve. A sikeres fordítás ezeket nem igazolja.
 
 A komponens saját A2DP Source megvalósítás, nem gyári ESPHome audio platform; kizárólag a leírt chime-funkcióra készült. Nem szolgáltat általános `media_player` entitást vagy tetszőleges MP3/TTS lejátszást.
+
+## Nyilvános GitHub-forrás ellenőrzése
+
+Az `examples/kallsup.yaml` a `f015844101867281244a53ffbd5a935054dc315b` komponens-commithoz van rögzítve. Az ESPHome a nyilvános `trtk/A2DP-ESPHome` repositoryból, `external_components` Git-forráson keresztül ténylegesen letöltötte a komponenst. Az így betöltött példakonfiguráció teljes fordítása és linkelése is sikeres volt; a factory és OTA bináris újra elkészült. A Wi-Fi/API tesztadatok és a generált binárisok nem kerültek a repositoryba.
